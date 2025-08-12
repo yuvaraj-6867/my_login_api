@@ -1,6 +1,6 @@
 <h1>Sign In</h1>
 
-<%= form_with url: signin_path, method: :post do |form| %>
+<%= form_with url: signin_path, scope: :session, method: :post do |form| %>
   <div>
     <%= form.label :email %><br>
     <%= form.email_field :email %>
@@ -15,3 +15,5 @@
     <%= form.submit "Sign In" %>
   </div>
 <% end %>
+
+<%= link_to "Don't have an account? Sign Up", signup_path %>

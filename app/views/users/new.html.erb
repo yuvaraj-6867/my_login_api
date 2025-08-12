@@ -5,15 +5,20 @@
     <%= f.label :email %><br>
     <%= f.email_field :email %>
   </div>
+
   <div>
     <%= f.label :password %><br>
     <%= f.password_field :password %>
   </div>
+
   <div>
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+
   <div>
     <%= f.submit "Sign Up" %>
   </div>
 <% end %>
+
+<%= link_to "Already have an account? Sign In", signin_path %>
