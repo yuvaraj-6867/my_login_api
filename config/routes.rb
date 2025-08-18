@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
   # User signup (registration)
+  get "/users", to: "users#index"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
 
