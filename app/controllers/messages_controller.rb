@@ -3,21 +3,38 @@ class MessagesController < ApplicationController
 
   def index
     messages = Message.all
-    render json: messages
+    render json: messages.map { |msg|
+      {
+        id: msg.id,
+        text: msg.content,
+        from: msg.sender_id == 1 ? 'me' : 'them',
+        created_at: msg.created_at
+      }
+    }
   end
 
   def create
-    message = Message.new(message_params)
+    message = Message.new(
+      sender_id: params[:sender_id] || 1,
+      receiver_id: params[:receiver_id] || 2,
+      content: params[:content]
+    )
+    
     if message.save
-      render json: message, status: :created
+      render json: {
+        id: message.id,
+        text: message.content,
+        from: 'me',
+        created_at: message.created_at
+      }, status: :created
     else
-      render json: { errors: message.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: message.errors }, status: 422
     end
   end
 
-  private
-
-  def message_params
-    params.require(:message).permit(:content, :user_id) 
+  def destroy
+    message = Message.find(params[:id])
+    message.destroy
+    render json: { message: 'Message deleted' }
   end
 end

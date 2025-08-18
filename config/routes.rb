@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :messages, only: [:index, :create]
+  resources :messages, only: [:index, :create, :destroy]
 
   # Optional alias (but not needed since resources already give /messages)
   post "/message", to: "messages#create"
