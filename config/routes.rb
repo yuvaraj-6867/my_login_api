@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  resources :messages, only: [:index, :create, :destroy]
+  match '*path', to: 'application#handle_options_request', via: :options
 
-  # Optional alias (but not needed since resources already give /messages)
-  post "/message", to: "messages#create"
-  get "/message", to: "messages#index"
 
   # User signup (registration)
   get "/signup", to: "users#new"
